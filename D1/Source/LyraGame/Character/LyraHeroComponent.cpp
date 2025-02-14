@@ -287,7 +287,7 @@ void ULyraHeroComponent::InitializePlayerInput(UInputComponent* PlayerInputCompo
 					LyraIC->BindNativeAction(InputConfig, LyraGameplayTags::InputTag_Look_Mouse, ETriggerEvent::Triggered, this, &ThisClass::Input_LookMouse, /*bLogIfNotFound=*/ false);
 					LyraIC->BindNativeAction(InputConfig, LyraGameplayTags::InputTag_Look_Stick, ETriggerEvent::Triggered, this, &ThisClass::Input_LookStick, /*bLogIfNotFound=*/ false);
 					LyraIC->BindNativeAction(InputConfig, LyraGameplayTags::InputTag_Crouch, ETriggerEvent::Triggered, this, &ThisClass::Input_Crouch, /*bLogIfNotFound=*/ false);
-					LyraIC->BindNativeAction(InputConfig, LyraGameplayTags::InputTag_AutoRun, ETriggerEvent::Triggered, this, &ThisClass::Input_AutoRun, /*bLogIfNotFound=*/ false);
+					//LyraIC->BindNativeAction(InputConfig, LyraGameplayTags::InputTag_AutoRun, ETriggerEvent::Triggered, this, &ThisClass::Input_AutoRun, /*bLogIfNotFound=*/ false);
 				}
 			}
 		}
@@ -377,12 +377,6 @@ void ULyraHeroComponent::Input_Move(const FInputActionValue& InputActionValue)
 	APawn* Pawn = GetPawn<APawn>();
 	AController* Controller = Pawn ? Pawn->GetController() : nullptr;
 
-	// If the player has attempted to move again then cancel auto running
-	if (ALyraPlayerController* LyraController = Cast<ALyraPlayerController>(Controller))
-	{
-		LyraController->SetIsAutoRunning(false);
-	}
-	
 	if (Controller)
 	{
 		const FVector2D Value = InputActionValue.Get<FVector2D>();
@@ -464,7 +458,7 @@ void ULyraHeroComponent::Input_AutoRun(const FInputActionValue& InputActionValue
 		if (ALyraPlayerController* Controller = Cast<ALyraPlayerController>(Pawn->GetController()))
 		{
 			// Toggle auto running
-			Controller->SetIsAutoRunning(!Controller->GetIsAutoRunning());
+			//Controller->SetIsAutoRunning(!Controller->GetIsAutoRunning());
 		}	
 	}
 }
